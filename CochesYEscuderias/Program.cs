@@ -6,8 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<CochesContext>();
-builder.Services.AddScoped<ICocheRepositorio,EFCocheRepositorio>();
-builder.Services.AddScoped<IRepositorio<Escuderia>, FakeEscuderiaRepositorio>();
+//builder.Services.AddScoped<IRepositorio<Coche>,RepositorioGenerico<Coche>>();
+//builder.Services.AddScoped<IRepositorio<Escuderia>, RepositorioGenerico<Escuderia>>();
+builder.Services.AddScoped(typeof(IRepositorio<>),typeof(RepositorioGenerico<>));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

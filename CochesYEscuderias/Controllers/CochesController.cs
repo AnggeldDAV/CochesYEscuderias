@@ -12,11 +12,13 @@ namespace CochesYEscuderias.Controllers
 {
     public class CochesController : Controller
     {
-        private readonly ICocheRepositorio _repositorio;
+        private readonly IRepositorio<Coche> _repositorio;
+        private readonly IRepositorio<Escuderia> _repositorio2;
 
-        public CochesController(ICocheRepositorio repositorio)
+        public CochesController(IRepositorio<Coche> repositorio, IRepositorio<Escuderia> repositorio2)
         {
             _repositorio = repositorio;
+            _repositorio2 = repositorio2;
         }
 
         // GET: Coches
@@ -45,7 +47,7 @@ namespace CochesYEscuderias.Controllers
         // GET: Coches/Create
         public IActionResult Create()
         {
-            //ViewData["EscuderiaId"] = new SelectList(_context.Escuderias, "Id", "Nombre");
+            ViewData["EscuderiaId"] = new SelectList(_repositorio2.DameTodos(), "Id", "Nombre");
             return View();
         }
 
